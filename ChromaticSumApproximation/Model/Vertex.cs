@@ -30,5 +30,7 @@ namespace ChromaticSumApproximation.Model
         public int NonColoredDegree => Neighbors.Count(n => !n.Color.HasValue);
 
         public Vertex(int idx) => Index = idx;
+
+        public void ResetColor() => Color = null;
     }
 }
