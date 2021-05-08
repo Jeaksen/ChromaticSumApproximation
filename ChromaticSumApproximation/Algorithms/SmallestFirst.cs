@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace ChromaticSumApproximation.Algorithms
 {
-    class SmallestFirst : IChromaticSumApproximator
+    class SmallestFirst : ChromaticSumApproximator
     {
-        public int ApproximateChromaticSum(Graph graph)
+        public override int ApproximateChromaticSum(Graph graph)
         {
+            var firstVertex = graph.Vertices.Min(v => v.Degree);
+
             throw new NotImplementedException();
         }
     }

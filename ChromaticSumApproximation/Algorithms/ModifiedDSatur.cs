@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ChromaticSumApproximation.Algorithms
 {
-    class ModifiedDSatur : IChromaticSumApproximator
+    class ModifiedDSatur : ChromaticSumApproximator
     {
-        public int ApproximateChromaticSum(Graph graph)
+        public override int ApproximateChromaticSum(Graph graph)
         {
             throw new NotImplementedException();
         }
