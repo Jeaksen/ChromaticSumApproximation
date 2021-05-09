@@ -57,20 +57,22 @@ namespace ChromaticSumApproximation.Tests
         public void Test4()
         {
             var graph = new Graph();
+            var algo = new SmallestFirst();
+
             graph.Vertices.Add(new Vertex(0));
             graph.Vertices.Add(new Vertex(1));
             graph.Vertices.Add(new Vertex(2));
 
-            Assert.Equal(graph.Vertices[0].Index, graph.SmallestDegreeVertex.Index);
+            Assert.Equal(graph.Vertices[0].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
 
             graph.Vertices[0].Neighbors.Add(graph.Vertices[1]);
             graph.Vertices[1].Neighbors.Add(graph.Vertices[2]);
 
-            Assert.Equal(graph.Vertices[2].Index, graph.SmallestDegreeVertex.Index);
+            Assert.Equal(graph.Vertices[2].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
 
             graph.Vertices[2].Neighbors.Add(graph.Vertices[0]);
 
-            Assert.Equal(graph.Vertices[0].Index, graph.SmallestDegreeVertex.Index);
+            Assert.Equal(graph.Vertices[0].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
         }
 
 
