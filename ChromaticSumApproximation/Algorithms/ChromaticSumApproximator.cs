@@ -11,7 +11,7 @@ namespace ChromaticSumApproximation.Algorithms
     {
         protected int StartColor => 1;
 
-        protected int GetFreeColorGreedily(Graph graph, Vertex vertex)
+        public int GetFreeColorGreedily(Vertex vertex)
         {
             if (vertex.Color.HasValue)
                 throw new ArgumentException("The vertex already has a color");

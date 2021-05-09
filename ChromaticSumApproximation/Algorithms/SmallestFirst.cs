@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChromaticSumApproximation.Algorithms
 {
-    class SmallestFirst : ChromaticSumApproximator
+    public class SmallestFirst : ChromaticSumApproximator
     {
         public override int ApproximateChromaticSum(Graph graph)
         {
