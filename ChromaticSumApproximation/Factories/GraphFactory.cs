@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChromaticSumApproximation.Factories
 {
@@ -13,11 +11,27 @@ namespace ChromaticSumApproximation.Factories
         public Graph GraphFromAdjacencyList(string filename)
         {
             var lines = File.ReadAllLines(filename).Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
+            return GetGraphFromList(lines);
+        }
+
+        public List<Graph> GraphsFromAdjacencyLists(string filename)
+        {
+            var text = File.ReadAllText(filename);
+            var lists = text.Split("\n\n");
+            var graphs = new List<Graph>();
+
+            foreach (var list in lists)
+                graphs.Add(GetGraphFromList(list.Split('\n')));
+
+            return graphs;
+        }
+
+        private Graph GetGraphFromList(string[] lines)
+        {
             if (lines.Length == 0)
                 throw new ArgumentException("Adjacency List was empty");
 
             var graph = new Graph();
-            
             for (int i = 0; i < lines.Length; ++i)
                 graph.Vertices.Add(new Vertex(i));
 
@@ -35,5 +49,7 @@ namespace ChromaticSumApproximation.Factories
 
             return graph;
         }
+
+
     }
 }
