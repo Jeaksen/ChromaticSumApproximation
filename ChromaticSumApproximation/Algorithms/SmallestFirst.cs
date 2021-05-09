@@ -11,7 +11,7 @@ namespace ChromaticSumApproximation.Algorithms
     {
         public override int ApproximateChromaticSum(Graph graph)
         {
-            var firstVertex = GetSmallestDegreeVertex(graph.Vertices);
+            var firstVertex = GetMinimalDegreeVertex(graph.Vertices);
             firstVertex.Color = GetFreeColorGreedily(firstVertex);
             int coloredVertices = 1;
             int chromaticSum = 1;
@@ -21,7 +21,7 @@ namespace ChromaticSumApproximation.Algorithms
                 var nextVertex = FindNextVertex(graph);
                 nextVertex.Color = GetFreeColorGreedily(nextVertex);
                 chromaticSum += nextVertex.Color.Value;
-                coloredVertices++;
+                ++coloredVertices;
             }
 
             return chromaticSum;
@@ -33,12 +33,12 @@ namespace ChromaticSumApproximation.Algorithms
             if (minSaturationVertices.Count == 1)
                 return minSaturationVertices.First();
             else
-                return GetSmallestDegreeVertex(minSaturationVertices);
+                return GetMinimalDegreeVertex(minSaturationVertices);
         }
 
         private List<Vertex> GetMinSaturationVertices(Graph graph)
         {
-            var notColored = graph.Vertices.Where(v => !v.IsColored).ToList();
+            var notColored = graph.NonColoredVertices;
             int minSatDegree = notColored.Min(v => v.SaturationDegree);
             return notColored.Where(v => v.SaturationDegree == minSatDegree).ToList();
         }

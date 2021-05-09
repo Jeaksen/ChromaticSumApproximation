@@ -63,16 +63,16 @@ namespace ChromaticSumApproximation.Tests
             graph.Vertices.Add(new Vertex(1));
             graph.Vertices.Add(new Vertex(2));
 
-            Assert.Equal(graph.Vertices[0].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
+            Assert.Equal(graph.Vertices[0].Index, algo.GetMinimalDegreeVertex(graph.Vertices).Index);
 
             graph.Vertices[0].Neighbors.Add(graph.Vertices[1]);
             graph.Vertices[1].Neighbors.Add(graph.Vertices[2]);
 
-            Assert.Equal(graph.Vertices[2].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
+            Assert.Equal(graph.Vertices[2].Index, algo.GetMinimalDegreeVertex(graph.Vertices).Index);
 
             graph.Vertices[2].Neighbors.Add(graph.Vertices[0]);
 
-            Assert.Equal(graph.Vertices[0].Index, algo.GetSmallestDegreeVertex(graph.Vertices).Index);
+            Assert.Equal(graph.Vertices[0].Index, algo.GetMinimalDegreeVertex(graph.Vertices).Index);
         }
 
 

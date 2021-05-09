@@ -31,11 +31,15 @@ namespace ChromaticSumApproximation.Algorithms
             return freeColor;
         }
 
-        public Vertex GetSmallestDegreeVertex(List<Vertex> vertices)
+        public Vertex GetMinimalDegreeVertex(List<Vertex> vertices)
         {
             return vertices.Aggregate((Vertex curMin, Vertex v) => (v.Degree < curMin.Degree ? v : curMin));
         }
 
+        public Vertex GetMaximalDegreeVertex(List<Vertex> vertices)
+        {
+            return vertices.Aggregate((Vertex curMax, Vertex v) => (v.Degree > curMax.Degree ? v : curMax));
+        }
 
         public abstract int ApproximateChromaticSum(Graph graph);
     }

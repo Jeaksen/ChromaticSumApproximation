@@ -29,6 +29,8 @@ namespace ChromaticSumApproximation.Model
 
         public int NonColoredDegree => Neighbors.Count(n => n.IsColored);
 
+        public List<Vertex> NonColoredNeighbors => Neighbors.Where(v => !v.IsColored).ToList();
+
         public bool IsColored => Color.HasValue;
 
         public Vertex(int idx) => Index = idx;
