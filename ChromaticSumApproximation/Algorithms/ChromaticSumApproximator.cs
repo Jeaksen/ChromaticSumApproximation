@@ -13,7 +13,7 @@ namespace ChromaticSumApproximation.Algorithms
 
         public int GetFreeColorGreedily(Vertex vertex)
         {
-            if (vertex.Color.HasValue)
+            if (vertex.IsColored)
                 throw new ArgumentException("The vertex already has a color");
 
             var neighborColors = vertex.NeighborColors;
@@ -30,6 +30,12 @@ namespace ChromaticSumApproximation.Algorithms
             }
             return freeColor;
         }
+
+        public Vertex GetSmallestDegreeVertex(List<Vertex> vertices)
+        {
+            return vertices.Aggregate((Vertex curMin, Vertex v) => (v.Degree < curMin.Degree ? v : curMin));
+        }
+
 
         public abstract int ApproximateChromaticSum(Graph graph);
     }

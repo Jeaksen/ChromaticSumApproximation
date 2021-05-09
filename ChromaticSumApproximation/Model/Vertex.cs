@@ -17,7 +17,7 @@ namespace ChromaticSumApproximation.Model
             {
                 var colors = new HashSet<int>();
                 foreach (var neighbor in Neighbors)
-                    if (neighbor.Color.HasValue)
+                    if (neighbor.IsColored)
                         colors.Add(neighbor.Color.Value);
                 return colors.ToList();
             }
@@ -27,10 +27,15 @@ namespace ChromaticSumApproximation.Model
 
         public int Degree => Neighbors.Count;
 
-        public int NonColoredDegree => Neighbors.Count(n => !n.Color.HasValue);
+        public int NonColoredDegree => Neighbors.Count(n => n.IsColored);
+
+        public bool IsColored => Color.HasValue;
 
         public Vertex(int idx) => Index = idx;
 
         public void ResetColor() => Color = null;
+
+        public override string ToString() => $"Vertex {Index + 1}, {(IsColored ? Color.Value : "none")}";
+
     }
 }

@@ -53,6 +53,26 @@ namespace ChromaticSumApproximation.Tests
             Assert.Equal(1, algo.GetFreeColorGreedily(graph.Vertices[2]));
         }
 
+        [Fact(DisplayName = "GetSmallestDegreeVertex finds vertex with minimal degree")]
+        public void Test4()
+        {
+            var graph = new Graph();
+            graph.Vertices.Add(new Vertex(0));
+            graph.Vertices.Add(new Vertex(1));
+            graph.Vertices.Add(new Vertex(2));
+
+            Assert.Equal(graph.Vertices[0].Index, graph.SmallestDegreeVertex.Index);
+
+            graph.Vertices[0].Neighbors.Add(graph.Vertices[1]);
+            graph.Vertices[1].Neighbors.Add(graph.Vertices[2]);
+
+            Assert.Equal(graph.Vertices[2].Index, graph.SmallestDegreeVertex.Index);
+
+            graph.Vertices[2].Neighbors.Add(graph.Vertices[0]);
+
+            Assert.Equal(graph.Vertices[0].Index, graph.SmallestDegreeVertex.Index);
+        }
+
 
     }
 }
