@@ -21,7 +21,13 @@ namespace ChromaticSumApproximation.Factories
             var graphs = new List<Graph>();
 
             foreach (var list in lists)
-                graphs.Add(GetGraphFromList(list.Split('\n')));
+            {
+                var split = list.Split(';');
+                if (list.Split(';').Length > 1)
+                    graphs.Add(GetGraphWithBoundsFromList(split[2], split[0], split[1]));
+                else
+                    graphs.Add(GetGraphFromList(list.Split('\n')));
+            }
 
             return graphs;
         }
@@ -46,6 +52,15 @@ namespace ChromaticSumApproximation.Factories
 
                 graph.Vertices[idx].Neighbors.AddRange(neighborIdxs.Select(i => graph.Vertices[i]));
             }
+
+            return graph;
+        }
+
+        private Graph GetGraphWithBoundsFromList(string list, string index, string edges)
+        {
+            var graph = GetGraphFromList(list.Split('\n'));
+            graph.ChromaticIndex = int.Parse(index);
+            graph.NumberOfEdges = int.Parse(edges);
 
             return graph;
         }
