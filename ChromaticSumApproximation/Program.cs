@@ -15,11 +15,11 @@ namespace ChromaticSumApproximation
             var graphs = new List<Graph>();
 
             // one graph with 208 vertices
-            //graphs.Add(graphFactory.GraphFromAdjacencyList("../../../Graphs/graph_41669.lst"));
+            //graphs.Add(graphFactory.GraphFromAdjacencyList("../../../Graphs/Single/graph_41669.lst"));
             // 170 big graphs, over 240 vertices
-            //graphs.AddRange(graphFactory.GraphsFromAdjacencyLists("../../../Graphs/list_170_graphs.lst"));
+            //graphs.AddRange(graphFactory.GraphsFromAdjacencyLists("../../../Graphs/Lists/list_170_graphs.lst"));
             // 22 graphs with  different sizes and bounds calculation
-            graphs.AddRange(graphFactory.GraphsFromAdjacencyLists("../../../Graphs/chidx_22_graphs.lst"));
+            graphs.AddRange(graphFactory.GraphsFromAdjacencyLists("../../../Graphs/Lists/chidx_22_graphs.lst"));
 
             var smallestFirst = new SmallestFirst();
             var dSatur = new ModifiedDSatur();
