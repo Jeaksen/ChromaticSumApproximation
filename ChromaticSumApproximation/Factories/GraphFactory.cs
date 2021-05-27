@@ -11,7 +11,10 @@ namespace ChromaticSumApproximation.Factories
         public Graph GraphFromAdjacencyList(string filename)
         {
             var lines = File.ReadAllLines(filename).Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
-            return GetGraphFromList(lines);
+            if (lines[0].Split(';').Length > 1)
+                return GetGraphWithBoundsFromList(lines);
+            else
+                return GetGraphFromList(lines);
         }
 
         public List<Graph> GraphsFromAdjacencyLists(string filename)
@@ -56,11 +59,22 @@ namespace ChromaticSumApproximation.Factories
             return graph;
         }
 
-        private Graph GetGraphWithBoundsFromList(string list, string index, string edges)
+        private Graph GetGraphWithBoundsFromList(string list, string number, string edges)
         {
             var graph = GetGraphFromList(list.Split('\n'));
-            graph.ChromaticIndex = int.Parse(index);
+            graph.ChromaticNumber = int.Parse(number);
             graph.NumberOfEdges = int.Parse(edges);
+
+            return graph;
+        }
+
+        private Graph GetGraphWithBoundsFromList(string[] lines)
+        {
+            var split = lines[0].Split(';');
+            lines[0] = split[2];
+            var graph = GetGraphFromList(lines);
+            graph.ChromaticNumber = int.Parse(split[0]);
+            graph.NumberOfEdges = int.Parse(split[1]);
 
             return graph;
         }

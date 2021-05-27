@@ -40,13 +40,15 @@ namespace ChromaticSumApproximation
 
             var graphFactory = new GraphFactory();
             var graphs = new List<Graph>();
-            
+
             // one graph with 208 vertices
             //graphs.Add(graphFactory.GraphFromAdjacencyList(GetSingleGraphPath("graph_41669.lst")));
+            // simple test graph
+            graphs.Add(graphFactory.GraphFromAdjacencyList(GetSingleGraphPath("graph_844.lst")));
             // 170 big graphs, over 240 vertices
             //graphs.AddRange(graphFactory.GraphsFromAdjacencyLists(GetGraphListsPath("list_170_graphs.lst")));
             // 22 graphs with  different sizes and bounds calculation
-            graphs.AddRange(graphFactory.GraphsFromAdjacencyLists(GetGraphListsPath("chidx_22_graphs.lst")));
+            //graphs.AddRange(graphFactory.GraphsFromAdjacencyLists(GetGraphListsPath("chidx_22_graphs.lst")));
 
             var smallestFirst = new SmallestFirst();
             var dSatur = new ModifiedDSatur();
@@ -66,7 +68,7 @@ namespace ChromaticSumApproximation
                 Console.WriteLine($"SmallestFirst chromatic sum : {sumSF}");
                 Console.WriteLine($"ModifiedDSatur chromatic sum : {sumDS}");
                 Console.WriteLine();
-                //graph.PrintVerticesWithColors();
+                graph.PrintVerticesWithColors();
             }
         }
     }

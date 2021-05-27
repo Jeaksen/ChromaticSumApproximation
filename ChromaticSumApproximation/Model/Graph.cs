@@ -11,13 +11,13 @@ namespace ChromaticSumApproximation.Model
 
         public List<Vertex> NonColoredVertices => Vertices.Where(v => !v.IsColored).ToList();
 
-        public int? ChromaticIndex { get; set; }
+        public int? ChromaticNumber { get; set; }
 
         public int? NumberOfEdges { get; set; }
 
         public int Size => Vertices.Count;
 
-        public bool HasDefinedBounds => ChromaticIndex.HasValue && NumberOfEdges.HasValue;
+        public bool HasDefinedBounds => ChromaticNumber.HasValue && NumberOfEdges.HasValue;
 
         public int ChromaticSumLowerBound
         {
@@ -26,8 +26,8 @@ namespace ChromaticSumApproximation.Model
                 if (!HasDefinedBounds)
                     throw new ArgumentNullException("The graph does not have defined chromatic sum bounds!");
                 var boundEdges = Math.Ceiling(Math.Sqrt(8 * NumberOfEdges.Value));
-                var boundIndex = Size + ChromaticIndex.Value * (ChromaticIndex.Value - 1) / 2.0;
-                return (int)Math.Max(boundEdges, boundIndex);
+                var boundNumber = Size + ChromaticNumber.Value * (ChromaticNumber.Value - 1) / 2.0;
+                return (int)Math.Max(boundEdges, boundNumber);
             }
         }
 
@@ -39,8 +39,8 @@ namespace ChromaticSumApproximation.Model
                     throw new ArgumentNullException("The graph does not have defined chromatic sum bounds!");
                 var boundEdgeVertex = Size + NumberOfEdges.Value;
                 var boundEdges = Math.Floor(3 * (NumberOfEdges.Value + 1) / 2.0);
-                var boundIndex = Math.Floor(Size * (ChromaticIndex.Value + 1) / 2.0);
-                return (int)Math.Min(Math.Max(boundEdgeVertex, boundEdges), boundIndex);
+                var boundNumber = Math.Floor(Size * (ChromaticNumber.Value + 1) / 2.0);
+                return (int)Math.Min(Math.Max(boundEdgeVertex, boundEdges), boundNumber);
             }
         }
 
@@ -68,7 +68,7 @@ namespace ChromaticSumApproximation.Model
             if (HasDefinedBounds)
             {
                 Console.WriteLine($"Number of edges: {NumberOfEdges}");
-                Console.WriteLine($"Chromatic index: {ChromaticIndex}");
+                Console.WriteLine($"Chromatic number: {ChromaticNumber}");
 
             }
         }
